@@ -1,6 +1,9 @@
 package com.example.androidperfermance;
 
+
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Environment;
 import android.os.Looper;
@@ -23,6 +26,7 @@ import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 
 import com.example.androidperfermance.adapter.MainAdapter;
@@ -74,6 +78,10 @@ public class MainActivity extends AppCompatActivity implements MainAdapter.OnFee
                 list.setLayoutManager(new LinearLayoutManager(MainActivity.this));
                 list.setAdapter(mainAdapter);
                 mainAdapter.setOnFeedShowListener(MainActivity.this);
+
+                ImageView imageView = findViewById(R.id.imageview);
+                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.bg_pk);
+                imageView.setImageBitmap(bitmap);
             }
         });
 
@@ -98,8 +106,6 @@ public class MainActivity extends AppCompatActivity implements MainAdapter.OnFee
 
         //TraceCompat.endSection();
         //getFps();
-
-
 
 
         //上报-重要人物需要测试(线程体执行的时间)

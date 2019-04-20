@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.StrictMode;
 import android.util.Log;
 
+import com.example.androidperfermance.memory.HookSetImageBitmap;
 import com.example.androidperfermance.thread.ReportTask;
 import com.example.androidperfermance.thread.ThreadPoolManager;
 import com.example.dexposed.DexposedManager;
@@ -43,35 +44,41 @@ public class PerformanceApp extends Application {
 //        Log.d(TAG, "string = " + string);
 
         //hook 所有线程的创建
-        DexposedManager.getIntance(this).hookConstructs(Thread.class, new DexposedManager.HookConstructorCallback<Thread>() {
-            @Override
-            public void hookConstruct(Thread thread) {
-                //得到创建线程的堆栈信息
-                Log.i(TAG, thread.getName() + " stack " + Log.getStackTraceString(new Throwable()));
-            }
-        });
+//        DexposedManager.getIntance().hookConstructs(Thread.class, new DexposedManager.HookConstructorCallback<Thread>() {
+//            @Override
+//            public void hookConstruct(Thread thread) {
+//                //得到创建线程的堆栈信息
+//                Log.i(TAG, thread.getName() + " stack " + Log.getStackTraceString(new Throwable()));
+//            }
+//        });
 
         //使用 hook 机制检测某一个方法的耗时
-        DexposedManager.getIntance(this).hookMethod(ReportTask.class, "run", new DexposedManager.HookMethodCallback<ReportTask>() {
+//        DexposedManager.getIntance().hookMethod(ReportTask.class, "run", new DexposedManager.HookMethodCallback<ReportTask>() {
+//
+//            private long start = 0;
+//
+//            @Override
+//            public void hookMethodBefore(ReportTask reportTask) {
+//                start = System.currentTimeMillis();
+//            }
+//
+//            @Override
+//            public void hookMothodAfter(ReportTask reportTask) {
+//                long end = System.currentTimeMillis();
+//                Log.d(TAG, "ReportTask run :" + (end - start));
+//            }
+//
+//            @Override
+//            public void hookConstruct(ReportTask reportTask) {
+//
+//            }
+//        });
 
-            private long start = 0;
+        //hook setImageBitmap
+        //这种方式如果图片在 xml 设置那么就没办法检测
+        HookSetImageBitmap.hookSetImageBitmap();
 
-            @Override
-            public void hookMethodBefore(ReportTask reportTask) {
-                start = System.currentTimeMillis();
-            }
 
-            @Override
-            public void hookMothodAfter(ReportTask reportTask) {
-                long end = System.currentTimeMillis();
-                Log.d(TAG, "ReportTask run :" + (end - start));
-            }
-
-            @Override
-            public void hookConstruct(ReportTask reportTask) {
-
-            }
-        });
 
     }
 
