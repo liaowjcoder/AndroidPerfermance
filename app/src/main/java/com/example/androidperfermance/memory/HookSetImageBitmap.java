@@ -45,7 +45,7 @@ public class HookSetImageBitmap {
                                 //不合理
                                 StringBuffer msg = new StringBuffer();
 
-                                msg.append("1图片大小不合理：")
+                                msg.append("图片大小不合理：")
                                         .append("bitmapWidth=").append(bitmapWidth)
                                         .append(",bitmapHeight=").append(bitmapHeight)
                                         .append(",viewWidth=").append(viewWidth)
@@ -64,7 +64,7 @@ public class HookSetImageBitmap {
 
                                         StringBuffer msg = new StringBuffer();
 
-                                        msg.append("2图片大小不合理：")
+                                        msg.append("图片大小不合理：")
                                                 .append("bitmapWidth=").append(bitmapWidth)
                                                 .append(",bitmapHeight=").append(bitmapHeight)
                                                 .append(",viewWidth=").append(viewWidth)
